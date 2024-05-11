@@ -21,19 +21,16 @@ const SudokuBoard = () => {
     const sBoard = JSON.parse(JSON.stringify(initialBoard));
 
     const isValid = (row, col, num) => {
-      // Check if the number is already present in the row
       for (let i = 0; i < 9; i++) {
         if (sBoard[row][i] === num) {
           return false;
         }
       }
-      // Check if the number is already present in the column
       for (let i = 0; i < 9; i++) {
         if (sBoard[i][col] === num) {
           return false;
         }
       }
-      // Check if the number is already present in the 3x3 grid
       const startRow = Math.floor(row / 3) * 3;
       const startCol = Math.floor(col / 3) * 3;
       for (let i = 0; i < 3; i++) {
@@ -81,7 +78,7 @@ const SudokuBoard = () => {
   };
 
   const handleNewPuzzle = () => {
-    // Your logic to generate a new puzzle
+    //had to be done
     setBoard(newPuzzle);
     setUserBoard(newPuzzle);
     setMessage("");
@@ -108,17 +105,16 @@ const SudokuBoard = () => {
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="w-6/12 h-5.5/6 bg-gray-200 border border-gray-400 rounded-lg p-2 relative">
-        <table className="m-4">
+    <div className="flex flex-col items-center">
+      <div className="w-full md:w-6/12 bg-gray-200 border border-gray-400 rounded-lg  relative mb-4">
+        <table className="m-1 md:ml-7">
           <tbody>
             {userBoard.map((row, rowIndex) => (
-              <tr key={rowIndex} className="p-4">
+              <tr key={rowIndex} className="p-2">
                 {row.map((cell, colIndex) => (
                   <td
                     key={colIndex}
-                    className="w-[60px] h-[60px] border border-gray-300 bg-white text-center cursor-pointer"
-                    style={{ margin: "2px" }}
+                    className="w-[58px] h-[58px] md:w-22 md:h-22 border border-gray-300 bg-white text-center cursor-pointer"
                     onClick={() => handleCellClick(rowIndex, colIndex)}
                   >
                     {cell || ""}
@@ -129,7 +125,7 @@ const SudokuBoard = () => {
           </tbody>
         </table>
         {message && (
-          <div className="absolute bottom-0 left-0 right-0 bg-white p-4 text-center">
+          <div className=" bg-white m-4 text-center">
             <div
               className={`text-lg ${
                 message.includes("Congratulations")
@@ -142,9 +138,9 @@ const SudokuBoard = () => {
           </div>
         )}
       </div>
-      <div className="flex flex-col justify-between ml-4">
+      <div className="flex flex-col md:flex-row">
         <button
-          className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-4"
+          className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-4 md:mb-0 md:mr-2"
           onClick={handleNewPuzzle}
         >
           Get New Puzzle
